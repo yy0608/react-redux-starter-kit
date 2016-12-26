@@ -1,0 +1,204 @@
+@mixin line-num ($num) {
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $num;
+  -webkit-box-orient: vertical;
+}
+@mixin border-1px($color, $dir, $borderRadius: 0) {
+  $direction: border;
+  @if $dir == all {
+    border: 1px solid $color;
+    border-radius: $borderRadius;
+  } @else if $dir == top {
+    border-top: 1px solid $color;
+  } @else if $dir == right {
+    border-right: 1px solid $color;
+  } @else if $dir == bottom {
+    border-bottom: 1px solid $color;
+  } @else if $dir == left {
+    border-left: 1px solid $color;
+  } @else if $dir == top-bottom or $dir == bottom-top {
+    border-top: 1px solid $color;
+    border-bottom: 1px solid $color;
+  } @else if $dir left-right or $dir == right-left {
+    border-left: 1px solid $color;
+    border-right: 1px solid $color;
+  }
+  @media (-webkit-device-pixel-ratio:2),(device-pixel-ratio:2),(-webkit-device-pixel-ratio:3),(device-pixel-ratio:3) {
+    // position: relative;
+    #{$direction}: none;
+    @if $dir == all {
+      border-radius: $borderRadius;
+    }
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      @if $dir == all {
+        border: 1px solid $color;
+        width: 200%;
+        height: 200%;
+        top: 0;
+        left: 0;
+        border-radius: $borderRadius;
+        -webkit-transform: scale(0.5) translate3d(-50%, -50%, 0);
+        transform: scale(0.5) translate3d(-50%, -50%, 0);
+      } @else if $dir == top {
+        border-top: 1px solid $color;
+        width: 200%;
+        height: 0;
+        top: 0;
+        left: 0;
+        -webkit-transform: scale(0.5) translate3d(-50%, -50%, 0);
+        transform: scale(0.5) translate3d(-50%, -50%, 0);
+      } @else if $dir == right {
+        border-right: 1px solid $color;
+        width: 0;
+        height: 200%;
+        top: 0;
+        right: 0;
+        -webkit-transform: scale(0.5) translate3d(50%, -50%, 0);
+        transform: scale(0.5) translate3d(50%, -50%, 0);
+      } @else if $dir == bottom {
+        border-bottom: 1px solid $color;
+        width: 200%;
+        height: 0;
+        bottom: 0;
+        left: 0;
+        -webkit-transform: scale(0.5) translate3d(-50%, 50%, 0);
+        transform: scale(0.5) translate3d(-50%, 50%, 0);
+      } @else if $dir == left {
+        border-left: 1px solid $color;
+        width: 0;
+        height: 200%;
+        top: 0;
+        left: 0;
+        -webkit-transform: scale(0.5) translate3d(-50%, -50%, 0);
+        transform: scale(0.5) translate3d(-50%, -50%, 0);
+      } @else if $dir == top-bottom or $dir == bottom-top {
+        border-top: 1px solid $color;
+        width: 200%;
+        height: 0;
+        top: 0;
+        left: 0;
+        -webkit-transform: scale(0.5) translate3d(-50%, -50%, 0);
+        transform: scale(0.5) translate3d(-50%, -50%, 0);
+      } @else if $dir == left-right or $dir == right-left {
+        border-left: 1px solid $color;
+        width: 0;
+        height: 200%;
+        top: 0;
+        left: 0;
+        -webkit-transform: scale(0.5) translate3d(-50%, -50%, 0);
+        transform: scale(0.5) translate3d(-50%, -50%, 0);
+      }
+    }
+    // @if $dir == top-bottom or $dir == bottom-top or $dir == left-right or $dir == right-left {
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        @if $dir == top-bottom or $dir == bottom-top {
+          border-bottom: 1px solid $color;
+          width: 200%;
+          height: 0;
+          bottom: 0;
+          left: 0;
+          -webkit-transform: scale(0.5) translate3d(-50%, -50%, 0);
+          transform: scale(0.5) translate3d(-50%, -50%, 0);
+        } @else if $dir == left-right or $dir == right-left {
+          border-right: 1px solid $color;
+          width: 0;
+          height: 200%;
+          top: 0;
+          right: 0;
+          -webkit-transform: scale(0.5) translate3d(-50%, -50%, 0);
+          transform: scale(0.5) translate3d(-50%, -50%, 0);
+        }
+      }
+    // }
+  }
+  // @media (-webkit-device-pixel-ratio:3),(device-pixel-ratio:3) {
+  //   // position: relative;
+  //   #{$direction}: none;
+  //   @if $dir == all {
+  //     border-radius: $borderRadius;
+  //   }
+  //   &:after {
+  //     content: ' ';
+  //     display: block;
+  //     position: absolute;
+  //     -webkit-box-sizing: border-box;
+  //     box-sizing: border-box;
+  //     @if $dir == all {
+  //       border: 1px solid $color;
+  //       width: 300%;
+  //       height: 300%;
+  //       top: 0;
+  //       left: 0;
+  //       -webkit-transform: scale(0.333) translate3d(-100.1%, -100.1%, 0);
+  //       transform: scale(0.333) translate3d(-100.1%, -100.1%, 0);
+  //       border-radius: $borderRadius;
+  //     } @else if $dir == top {
+  //       border-top: 1px solid $color;
+  //       width: 300%;
+  //       height: 0;
+  //       top: 0;
+  //       left: 0;
+  //       -webkit-transform: scale(0.3333) translate3d(-99.99%, -99.99%, 0);
+  //       transform: scale(0.3333) translate3d(-99.99%, -99.99%, 0);
+  //     } @else if $dir == right {
+  //       border-right: 1px solid $color;
+  //       width: 0;
+  //       height: 300%;
+  //       top: 0;
+  //       right: 0;
+  //       -webkit-transform: scale(0.3333) translate3d(99.99%, -99.99%, 0);
+  //       transform: scale(0.3333) translate3d(99.99%, -99.99%, 0);
+  //     } @else if $dir == bottom {
+  //       border-bottom: 1px solid $color;
+  //       width: 300%;
+  //       height: 0;
+  //       bottom: 0;
+  //       left: 0;
+  //       -webkit-transform: scale(0.5) translate3d(-50%, 50%, 0);
+  //       transform: scale(0.5) translate3d(-50%, 50%, 0);
+  //       -webkit-transform: scale(0.3333) translate3d(-99.99%, 99.99%, 0);
+  //       transform: scale(0.3333) translate3d(-99.99%, 99.99%, 0);
+  //     } @else if $dir == left {
+  //       border-left: 1px solid $color;
+  //       width: 0;
+  //       height: 300%;
+  //       top: 0;
+  //       left: 0;
+  //       -webkit-transform: scale(0.5) translate3d(-50%, -50%, 0);
+  //       transform: scale(0.5) translate3d(-50%, -50%, 0);
+  //       -webkit-transform: scale(0.3333) translate3d(-99.99%, -99.99%, 0);
+  //       transform: scale(0.3333) translate3d(-99.99%, -99.99%, 0);
+  //     } @else if $dir == top-bottom or $dir == bottom-top {
+  //       border-top: 1px solid $color;
+  //       border-bottom: 1px solid $color;
+  //       width: 300%;
+  //       height: 300%;
+  //       top: 0;
+  //       left: 0;
+  //       -webkit-transform: scale(0.3333) translate3d(-99.99%, -99.99%, 0);
+  //       transform: scale(0.3333) translate3d(-99.99%, -99.99%, 0);
+  //     } @else if $dir == left-right or $dir == right-left {
+  //       border-left: 1px solid $color;
+  //       border-right: 1px solid $color;
+  //       width: 300%;
+  //       height: 300%;
+  //       top: 0;
+  //       left: 0;
+  //       -webkit-transform: scale(0.3333) translate3d(-99.99%, -99.99%, 0);
+  //       transform: scale(0.3333) translate3d(-99.99%, -99.99%, 0);
+  //     }
+  //   }
+  // }
+}

@@ -1,25 +1,19 @@
 // We only need to import the modules necessary for initial render
 import CoreLayout from '../layouts/CoreLayout'
 import Home from './Home'
-import ManageRoute from './Manage'
-import StatisticRoute from './Statistic'
-import ForbiddenRoute from './Forbidden'
+import CounterRoute from './Counter'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
-export const createRoutes = (store) => (
-  {
-    path        : '/',
-    component   : CoreLayout,
-    indexRoute  : Home,
-    childRoutes : [
-      ManageRoute(store),
-      StatisticRoute(store),
-      ForbiddenRoute(store)
-    ]
-  }
-)
+export const createRoutes = (store) => ({
+  path        : '/',
+  component   : CoreLayout,
+  indexRoute  : Home,
+  childRoutes : [
+    CounterRoute(store)
+  ]
+})
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
     using getChildRoutes with the following signature:

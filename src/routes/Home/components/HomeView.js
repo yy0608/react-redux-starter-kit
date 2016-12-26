@@ -1,15 +1,23 @@
 import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
+import ReactDOM from 'react-dom'
 import './HomeView.scss'
+
+// const HomeView = React.CreateClass({
+//   render () {
+//     return (
+//       <div>
+//         <h4>check!</h4>
+//       </div>
+//     )
+//   }
+// })
 
 export const HomeView = () => (
   <div>
-    <h4>Welcome!</h4>
-    <img
-      alt='This is a duck, because Redux!'
-      className='duck'
-      src={DuckImage} />
+    <h4>check!</h4>
   </div>
 )
+
+console.log(123);
 
 export default HomeView
