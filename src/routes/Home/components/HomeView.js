@@ -1,6 +1,5 @@
 import React from 'react'
 import $ from 'jquery'
-import { browserHistory, Router } from 'react-router'
 import API from '../../../utils/api'
 import HeaderFirst from './HeaderFirst'
 import EmptyTip from '../../../components/EmptyTip'

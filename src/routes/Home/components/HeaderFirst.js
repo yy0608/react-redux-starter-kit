@@ -26,10 +26,10 @@ const HeaderFirst = React.createClass({
   render () {
     return (
       <div className='first-tabs'>
-        <IndexLink to='/post' className='nav-a' activeClassName='route--active'>
+        <Link to='/check/post' className='nav-a' activeClassName='route--active'>
           帖子({this.state.topic_count})
-        </IndexLink>
-        <Link to='/reply' className='nav-a' activeClassName='route--active'>
+        </Link>
+        <Link to='/check/reply' className='nav-a' activeClassName='route--active'>
           回复({this.state.reply_count})
         </Link>
       </div>

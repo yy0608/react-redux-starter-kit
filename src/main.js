@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import createStore from './store/createStore'
-import AppContainer from './containers/AppContainer'
+
+import { Router, browserHistory } from 'react-router'
 
 // import CoreLayout from './layouts/CoreLayout'
 // import Home from './Home'
@@ -13,7 +13,6 @@ import AppContainer from './containers/AppContainer'
 // Store Instantiation
 // ========================================================
 const initialState = window.___INITIAL_STATE__
-const store = createStore(initialState)
 
 // ========================================================
 // Render Setup
@@ -21,17 +20,10 @@ const store = createStore(initialState)
 const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
-  const routes = require('./routes/index').default(store)
-
-  // const Route = require('react-router').Route
-
-  // const routes = <Route path="/" component={CoreLayout}>
-  //                   <Route path="/manage" component={ManageRoute}/>
-  //                   <Route path="/statistic" component={StatisticRoute}/>
-  //                 </Route>;
+  const routes = require('./routes/index').default
 
   ReactDOM.render(
-    <AppContainer store={store} routes={routes} />,
+    <Router routes={routes} history={browserHistory}/>,
     MOUNT_NODE
   )
 }

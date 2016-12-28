@@ -1,7 +1,8 @@
 import React from 'react'
 import $ from 'jquery'
 import API from '../../../utils/api'
-import TableTh from '../../../components/TableSection/TableTh'
+import TableThead from '../../../components/TableSection/TableThead'
+import TableBody from '../../../components/TableSection/TableBody'
 
 const PostDetailView = React.createClass({
   getInitialState () {
@@ -37,27 +38,8 @@ const PostDetailView = React.createClass({
           </form>
           <div className='lists-wrapper'>
             <table width='100%'>
-              <thead>
-                <TableTh titleArr={titleArr} />
-              </thead>
-              <tbody>
-                {
-                  list.map((li, i) => {
-                    return (
-                      <tr key={i}>
-                        <td>{li.topic_id}</td>
-                        <td>{li.add_time}</td>
-                        <td>{li.checker_name}</td>
-                        <td>{li.status}</td>
-                        <td>{li.nickname}</td>
-                        <td>
-                          <button id={li.topic_id}>查看详情</button>
-                        </td>
-                      </tr>
-                    )
-                  })
-                }
-              </tbody>
+              <TableThead titleArr={titleArr} />
+              <TableBody list={list} />
               <tfoot>
                 <tr>
                   <td colSpan='6'>页码区域</td>
