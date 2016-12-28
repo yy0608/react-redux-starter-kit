@@ -1,39 +1,38 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
 
-export const Header = () => (
-  <div className='menu-container'>
-    <div className='tc logo'>
-      <span className='img'></span>
-      <span className='text'>情侣说审核后台</span>
-    </div>
-    <ul className="nav-wrapper">
-      <li>
-        <IndexLink to='/' activeClassName='route--active'>
-          <i className='icon-map2'></i>审核
-        </IndexLink>
-      </li>
-      <li>
-        <Link to='/manage' activeClassName='route--active'>
-          <i className='icon-cogs'></i>管理
-        </Link>
-      </li>
-      <li>
-        <Link to='/statistic' activeClassName='route--active'>
-          <i className='icon-stats-bars'></i>统计
-        </Link>
-      </li>
-      <li>
-        <Link to='/forbidden' activeClassName='route--active'>
-          <i className='icon-users'></i>用户封禁
-        </Link>
-      </li>
-    </ul>
-    <div className="user-wrapper">
-      <span>Welcome,xxx</span>
-      <a href>退出</a>
-    </div>
-  </div>
-)
+const Header = React.createClass({
+  render(){
+    return (
+      <div className='menu-container' style={{height:window.document.documentElement.clientHeight}}>
+        <div className='tc logo'>
+          <span className='img'></span>
+          <span className='text'>情侣说审核后台</span>
+        </div>
+        <div className="nav-wrapper">
+          <div className='handle'>操作</div>
+          <IndexLink to='/' className='nav-a' activeClassName='route--active'>
+            <span className='nav-span'><i className='icon-map'></i>审核</span>
+          </IndexLink>
+          <Link to='/manage' className='nav-a' activeClassName='route--active'>
+            <span className='nav-span'><i className='icon-cog'></i>管理</span>
+          </Link>
+          <Link to='/statistic' className='nav-a' activeClassName='route--active'>
+            <span className='nav-span'><i className='icon-stats-dots'></i>统计</span>
+          </Link>
+          <Link to='/forbidden' className='nav-a' activeClassName='route--active'>
+            <span className='nav-span'><i className='icon-user-minus'></i>用户封禁</span>
+            </Link>
+        </div>
+        <div className="user-wrapper">
+          <span className='user'>Welcome,xxx</span>
+          <a className='exit' href>
+            <i className='icon-exit'></i>
+          </a>
+        </div>
+      </div>
+    )
+  }
+})
 
 export default Header

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const ForbiddenView = () => (
-  <div>
+  <div className='content-container'>
     <h4>ForbiddenView!</h4>
   </div>
 )

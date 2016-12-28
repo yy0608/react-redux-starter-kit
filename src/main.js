@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
 import AppContainer from './containers/AppContainer'
 
+// import CoreLayout from './layouts/CoreLayout'
+// import Home from './Home'
+// import ManageRoute from './routes/Manage'
+// import StatisticRoute from './routes/Statistic'
+// import ForbiddenRoute from './Forbidden'
+
 // ========================================================
 // Store Instantiation
 // ========================================================
@@ -16,6 +22,13 @@ const MOUNT_NODE = document.getElementById('root')
 
 let render = () => {
   const routes = require('./routes/index').default(store)
+
+  // const Route = require('react-router').Route
+
+  // const routes = <Route path="/" component={CoreLayout}>
+  //                   <Route path="/manage" component={ManageRoute}/>
+  //                   <Route path="/statistic" component={StatisticRoute}/>
+  //                 </Route>;
 
   ReactDOM.render(
     <AppContainer store={store} routes={routes} />,

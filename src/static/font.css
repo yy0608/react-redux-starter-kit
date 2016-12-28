@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'yy-icon';
-  src:  url('fonts/yy-icon.eot?td869k');
-  src:  url('fonts/yy-icon.eot?td869k#iefix') format('embedded-opentype'),
-    url('fonts/yy-icon.ttf?td869k') format('truetype'),
-    url('fonts/yy-icon.woff?td869k') format('woff'),
-    url('fonts/yy-icon.svg?td869k#yy-icon') format('svg');
+  src:  url('fonts/yy-icon.eot?2x7r7q');
+  src:  url('fonts/yy-icon.eot?2x7r7q#iefix') format('embedded-opentype'),
+    url('fonts/yy-icon.ttf?2x7r7q') format('truetype'),
+    url('fonts/yy-icon.woff?2x7r7q') format('woff'),
+    url('fonts/yy-icon.svg?2x7r7q#yy-icon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,16 +24,25 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-map2:before {
-  content: "\e94c";
+.icon-files-empty:before {
+  content: "\e925";
 }
-.icon-users:before {
-  content: "\e972";
+.icon-file-text2:before {
+  content: "\e926";
 }
-.icon-cogs:before {
-  content: "\e995";
+.icon-map:before {
+  content: "\e94b";
 }
-.icon-stats-bars:before {
-  content: "\e99c";
+.icon-user-minus:before {
+  content: "\e974";
+}
+.icon-cog:before {
+  content: "\e994";
+}
+.icon-stats-dots:before {
+  content: "\e99b";
+}
+.icon-exit:before {
+  content: "\ea14";
 }
 

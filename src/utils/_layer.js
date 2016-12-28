@@ -1,4 +1,4 @@
-import '../css/layer.scss'
+import '../styles/layer.scss'
 var Layer = {
   msg_id: 0,
   alert (text, onlyOne = false) {
