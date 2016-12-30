@@ -11,6 +11,7 @@ import BanuserView from './Forbidden/components/Forbidden'
 // check 二级路由
 import PostView from '../routes/Home/components/Post'
 import ReplyView from '../routes/Home/components/Reply'
+import ListView from '../routes/Home/components/List'
 
 // manage 二级路由
 import PostDetailView from '../routes/Manage/components/PostDetail'
@@ -21,6 +22,7 @@ import UserDetailView from '../routes/Manage/components/UserDetail'
 import UnhandlelRecordView from './Forbidden/components/UnhandlelRecord'
 import HandledlRecordView from './Forbidden/components/HandledlRecord'
 import BanuserRecordView from './Forbidden/components/BanuserRecord'
+import DetailView from './Forbidden/components/Detail'
 
 const App = React.createClass ({
   render () {
@@ -39,6 +41,7 @@ const routes = <Route path="/" component={App}>
                   <IndexRedirect to="post" />
                   <Route path='post' component={PostView} />
                   <Route path='reply' component={ReplyView} />
+                  <Route path='list' component={ListView} />
                 </Route>
                 <Route path="manage" component={ManageView}>
                   <IndexRedirect to="post_detail" />
@@ -52,6 +55,7 @@ const routes = <Route path="/" component={App}>
                   <Route path='unhandle_record' component={UnhandlelRecordView} />
                   <Route path='handled_record' component={HandledlRecordView} />
                   <Route path='banuser_record' component={BanuserRecordView} />
+                  <Route path='detail' component={DetailView} />
                 </Route>
               </Route>;
 

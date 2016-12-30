@@ -1,8 +1,12 @@
 import React from 'react'
 import $ from 'jquery'
 import API from '../../../utils/api'
+import Layer from '../../../utils/_layer'
 import HeaderFirst from './HeaderFirst'
 import EmptyTip from '../../../components/EmptyTip'
+import GroupBtns from './GroupBtns'
+import CheckBtns from './CheckBtns'
+import PassBtns from './PassBtns'
 
 const PostView = React.createClass ({
 
@@ -13,10 +17,11 @@ const PostView = React.createClass ({
     }
   },
 
-  componentWillMount () {
-    $.get(API.host+'/snapper_filter/v1/topic/list', (res) => {
+  selfInitState (options = '') {
+    //获取帖子详情
+    $.get(API.host+'/snapper_filter/v1/topic/list' + options, (res) => {
       var list = res.data.list[0]
-      if (this.isMounted) {
+      if (res.success && this.isMounted) {
         if (list) {
           if (list.ext_info) {
             this.setState({
@@ -26,13 +31,21 @@ const PostView = React.createClass ({
           this.setState({
             list: res.data.list
           })
-        } else {
-          this.setState({
-            listFlag: false
-          })
         }
       }
     })
+  },
+
+  componentWillMount () {
+    var topic_id = this.props.location.query.user_id
+    var optionsUrl = topic_id ? `?topic_id=${topic_id}` : ''
+    this.selfInitState(optionsUrl)
+  },
+
+  onChildChanged () { // 转移小组之后重新获取新帖子
+    this.selfInitState()
+    $('#headWrapper').trigger('click')
+    Layer.alert('操作成功!')
   },
 
   render () {
@@ -43,10 +56,6 @@ const PostView = React.createClass ({
       )
     } else {
       return (
-        // <Route>
-        //   <Route path='/post' component={PostView} />
-        //   <Route path='/reply' component={ReplyView} />
-        // </Route>
         <div>
           <div className='check-content'>
             <div className='post-info'>
@@ -67,22 +76,13 @@ const PostView = React.createClass ({
             </div>
           </div>
           <div className='handle-content'>
-            <h2>操作</h2>
-            <div className='handle-btns'>
-              <button className='push-into'>求祝福水贴</button>
-              <button className='push-into'>其他无意义水贴</button>
-              <button className='pass'>通过</button>
-              <a href='#' className='check-record'>审核纪录</a>
-            </div>
+            <h2>不通过审核操作</h2>
+            <CheckBtns topicId={list[0].topic_id} title={list[0].title} callbackParent={this.onChildChanged} />
           </div>
+          <PassBtns topicId={list[0].topic_id} replyId={list[0].reply_id} userId={list[0].user_id} nickName={list[0].nick_name} callbackParent={this.onChildChanged} />
           <div className='handle-content'>
             <h2>转移小组</h2>
-            <div className='handle-btns'>
-              <button className='pass'>晒恩爱</button>
-              <button className='pass'>我们的故事</button>
-              <button className='pass'>爱情碎碎念</button>
-              <button className='pass'>小恩爱粉丝群</button>
-            </div>
+            <GroupBtns topicId={list[0].topic_id} callbackParent={this.onChildChanged} />
           </div>
           <div className='main-content'>
             <p className='text'>帖子内容：{list[0].content}</p>

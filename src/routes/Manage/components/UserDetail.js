@@ -3,8 +3,8 @@ import React from 'react'
 export const UserDetailView = React.createClass({
   render () {
     return (
-      <div>
-        UserDetailView
+      <div className='user-detail'>
+        UserDetailView 暂无数据
       </div>
     )
   }

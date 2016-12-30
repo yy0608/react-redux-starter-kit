@@ -1,20 +1,60 @@
 import React from 'react'
 import $ from 'jquery'
+import ReactPaginate from 'rc-pagination'
+import Layer from '../../../utils/_layer'
 import API from '../../../utils/api'
+import STATUS from '../../../utils/status'
 import TableThead from '../../../components/TableSection/TableThead'
 import TableBody from '../../../components/TableSection/TableBody'
 
 const HandledlRecord = React.createClass({
   getInitialState () {
     return {
-      list: {}
+      list: {},
+      limit: 10,
+      current: 1
     }
   },
 
   componentWillMount () {
-    $.get(API.host + '/snapper_filter/v1/user/ban_list?user_id=0&nickname=&status=1&limit=20&offset=0', (res) => {
+    var limit = this.state.limit
+    var optionsUrl = `?limit=${limit}&status=1`
+    $.get(API.host + '/snapper_filter/v1/user/ban_list' + optionsUrl, (res) => { // ?user_id=0&nickname=&status=0&limit=20&offset=0
       if(this.isMounted) {
         this.setState({
+          list: res.data.list,
+          total: res.data.total_count
+        })
+      }
+    })
+  },
+
+  searchRecord (e) {
+    e.preventDefault()
+    // browserHistory.push('/banuser/unhandle_record')
+    var url = '/snapper_filter/v1/user/ban_list'
+    var user_id = this.refs.userId.value.trim()
+    var nickname = this.refs.userName.value.trim()
+    var param_url = `?user_id=${user_id}&nickname=${nickname}&limit=${this.state.limit}&status=1`
+    $.get(API.host + url + param_url, (res) => {
+      var list = res.data.list
+      if (this.isMounted) {
+        this.setState({
+          list: list,
+          total: res.data.total_count
+        })
+      }
+    })
+  },
+
+  onChange (page) { // 页码切换
+    var limit = this.state.limit
+    var offset = limit * (page-1)
+    var optionsUrl = `?limit=${limit}&offset=${offset}&status=1`
+    $.get(API.host + '/snapper_filter/v1/user/ban_list' + optionsUrl, (res) => {
+      if(this.isMounted && res.success) {
+        this.setState({
+          current: page,
           list: res.data.list
         })
       }
@@ -27,7 +67,6 @@ const HandledlRecord = React.createClass({
     if (this.state.list.length) {
       var list = this.state.list
       var titleArr = ['记录', '用户 id ', '用户昵称', '审核时间', '状态', '审核员', '操作']
-      var statusArr = ['未审核', '审核通过', '未审核先发布', '写入队列失败', '审核超时', '广告或垃圾信息', '色情、淫秽或低俗信息', '负面、消极的情感信息', '求祝福水贴', '其他原因', '其他无意义水贴', '辱骂、人身攻击', '竞品相关或诋毁小恩爱']
 
       return (
         <div className='post-detail-content'>
@@ -54,7 +93,7 @@ const HandledlRecord = React.createClass({
                       <td>{li.user_id}</td>
                       <td>{li.nickname}</td>
                       <td>{li.add_time}</td>
-                      <td>{statusArr[li.status-1]}</td>
+                      <td>{STATUS[li.status-1]}</td>
                       <td>{li.checker_name}</td>
                       <td>
                         <button id={li.topic_id}>查看详情</button>
@@ -66,7 +105,9 @@ const HandledlRecord = React.createClass({
               </tbody>
               <tfoot>
                 <tr>
-                  <td colSpan='7'>页码区域</td>
+                  <td colSpan='7'>
+                    <ReactPaginate onChange={this.onChange} pageSize={this.state.limit} current={this.state.current} total={this.state.total} ref='pageList'></ReactPaginate>
+                  </td>
                 </tr>
               </tfoot>
             </table>

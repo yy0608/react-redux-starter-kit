@@ -1,5 +1,6 @@
 import React from 'react'
 import TableThead from '../../../components/TableSection/TableThead'
+import Layer from '../../../utils/_layer'
 
 // const MyContainer = React.createClass({
 //   getInitialState () {
