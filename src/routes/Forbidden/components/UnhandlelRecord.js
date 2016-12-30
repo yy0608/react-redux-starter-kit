@@ -105,7 +105,7 @@ const UnhandlelRecord = React.createClass({
                       <td>{STATUS[li.status-1]}</td>
                       <td>{li.checker_name}</td>
                       <td>
-                        <button data-topic_id={li.topic_id} data-reply_id={li.reply_id} data-topic_type={li.topic_type} onClick={this.goDetail}>查看详情</button>
+                        <button className='see-detail' data-topic_id={li.topic_id} data-reply_id={li.reply_id} data-topic_type={li.topic_type} onClick={this.goDetail}>查看详情</button>
                       </td>
                     </tr>
                   )

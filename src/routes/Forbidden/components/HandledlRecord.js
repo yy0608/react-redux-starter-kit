@@ -1,5 +1,6 @@
 import React from 'react'
 import $ from 'jquery'
+import { browserHistory } from 'react-router'
 import ReactPaginate from 'rc-pagination'
 import Layer from '../../../utils/_layer'
 import API from '../../../utils/api'
@@ -61,6 +62,16 @@ const HandledlRecord = React.createClass({
     })
   },
 
+  goDetail (e) {
+    var value = e.target.dataset
+    var topic_id = value.topic_id
+    var reply_id = value.reply_id
+    var topic_type = value.topic_type
+    var routeUrl = `/banuser/detail?topic_id=${topic_id}&reply_id=${reply_id}&topic_type=${topic_type}`
+    console.log(routeUrl)
+    browserHistory.push(routeUrl)
+  },
+
 // 1:未审核，2:审核通过，3:未审核先发布,4:写入队列失败,5:审核超时,6:广告或垃圾信息,7:色情、淫秽或低俗信息,8:负面、消极的情感信息,
 // 9:求祝福水贴，10:其他原因,11:其他无意义水贴，12:辱骂、人身攻击，13:竞品相关或诋毁小恩爱
   render () {
@@ -96,7 +107,7 @@ const HandledlRecord = React.createClass({
                       <td>{STATUS[li.status-1]}</td>
                       <td>{li.checker_name}</td>
                       <td>
-                        <button id={li.topic_id}>查看详情</button>
+                        <button data-topic_id={li.topic_id} data-reply_id={li.reply_id} data-topic_type={li.topic_type} onClick={this.goDetail} className='see-detail' id={li.topic_id}>查看详情</button>
                       </td>
                     </tr>
                   )
